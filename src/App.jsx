@@ -1,23 +1,34 @@
-import './App.css';
-import { HashRouter, NavLink, Routes, Route, useNavigate } from 'react-router-dom';
+import './App.css'
+import { HashRouter, NavLink, Routes, Route, useNavigate, useParams, Outlet } from 'react-router-dom'
 
 const Home = () => {
-  return <p>這是首頁</p>;
+  return <p>這是首頁</p>
 }
 
 const Todo = () => {
-  return <p>這是 Todo 頁面</p>;
-};
+  return <p>這是 Todo 頁面</p>
+}
 const Login = () => {
-  return <p>這是登入頁面</p>;
-};
+  return <p>這是登入頁面</p>
+}
 const Logout = () => {
   const navigate = useNavigate()
   return <button type="button" onClick={() => navigate('/login')}>登出</button>
-};
+}
 const Register = () => {
-  return <p>這是註冊頁面</p>;
-};
+  return <p>這是註冊頁面</p>
+}
+
+const Post = () => {
+  return (<>
+    <p>這是 Post 頁面</p>
+    <Outlet />
+  </>)
+}
+const PostId = () => {
+  let param = useParams()
+  return <p>id: {param.id}</p>
+}
 
 function App() {
   return (
@@ -39,6 +50,9 @@ function App() {
           <NavLink to="/todo">
             <p>Todo 頁面</p>
           </NavLink>
+          <NavLink to="/post">
+            <p>Post 頁面</p>
+          </NavLink>
         </div>
         {/* Routes, Route 練習區 */}
         <Routes>
@@ -47,11 +61,14 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/logout" element={<Logout />}></Route>
           <Route path="/todo" element={<Todo />}></Route>
+          <Route path="/post" element={<Post />}>
+            <Route path=":id" element={<PostId />} />
+          </Route>
         </Routes>
         {/* 練習區 */}
       </HashRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
