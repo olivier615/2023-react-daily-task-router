@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter, NavLink, Routes, Route } from 'react-router-dom';
+import { HashRouter, NavLink, Routes, Route, useNavigate } from 'react-router-dom';
 
 const Home = () => {
   return <p>這是首頁</p>;
@@ -10,6 +10,10 @@ const Todo = () => {
 };
 const Login = () => {
   return <p>這是登入頁面</p>;
+};
+const Logout = () => {
+  const navigate = useNavigate()
+  return <button type="button" onClick={() => navigate('/login')}>登出</button>
 };
 const Register = () => {
   return <p>這是註冊頁面</p>;
@@ -29,6 +33,9 @@ function App() {
           <NavLink to="/login">
             <p>登入頁面</p>
           </NavLink>
+          <NavLink to="/logout">
+            <p>登出</p>
+          </NavLink>
           <NavLink to="/todo">
             <p>Todo 頁面</p>
           </NavLink>
@@ -38,6 +45,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/logout" element={<Logout />}></Route>
           <Route path="/todo" element={<Todo />}></Route>
         </Routes>
         {/* 練習區 */}
